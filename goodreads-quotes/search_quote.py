@@ -15,7 +15,7 @@ def fetch_quote(author):
     data = BeautifulSoup(page.text, 'html.parser')
     text = data.find_all('div', {"class": "quoteText"})
 
-
+    # find the quote itself
     for quote_text in text:
         for element in quote_text:
             if isinstance(element, NavigableString):
@@ -23,10 +23,14 @@ def fetch_quote(author):
                     element = element.replace("―", "")
                     quotes.append(element)
 
-        quote_author = quote_text.find(class_="authorOrTitle").text
-        quote_author = quote_author.replace(",", "")
-        quote_author = quote_author.strip()
-        quotes.append(quote_author)
+        # find quote author
+        try:   
+            quote_author = quote_text.find(class_="authorOrTitle").text
+            quote_author = quote_author.replace(",", "")
+            quote_author = quote_author.strip()
+            quotes.append(quote_author)
+        except:
+                quotes.append(None)
 
 
     while not data.find_all('span', {"class": "next_page disabled"}):
@@ -37,8 +41,8 @@ def fetch_quote(author):
         page = requests.get(url)
         data = BeautifulSoup(page.text, 'html.parser')
 
-        # find the quote itself
         text = data.find_all('div', {"class": "quoteText"})
+        
         
         for quote_text in text:
             for element in quote_text:
@@ -46,11 +50,15 @@ def fetch_quote(author):
                         element = element.replace("\n", "")
                         element = element.replace("―", "")
                         quotes.append(element)
-                
-            quote_author = quote_text.find(class_="authorOrTitle").text
-            quote_author = quote_author.replace(",", "")
-            quote_author = quote_author.strip()
-            quotes.append(quote_author)
+            
+            try:   
+                quote_author = quote_text.find(class_="authorOrTitle").text
+                quote_author = quote_author.replace(",", "")
+                quote_author = quote_author.strip()
+                quotes.append(quote_author)
+            except:
+                 quotes.append(None)
+    
 
     quotes = [ele for ele in quotes  if ele.strip()]
     
