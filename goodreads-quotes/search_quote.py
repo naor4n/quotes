@@ -62,9 +62,7 @@ def fetch_quote(author):
 
     quotes = [ele for ele in quotes  if ele.strip()]
     
-    for quote in quotes:
-         print(quote)
-
+    return quotes
 
 fetch_quote("Natsume Soseki")
 
