@@ -36,7 +36,6 @@ def fetch_quote(author):
             for element in quoteText:
                 if isinstance(element, NavigableString):
                         element = element.replace("\n", "")
-                        element = element.replace("―", "")
                         quotes.append(element)     
 
         # find quote author
@@ -44,6 +43,11 @@ def fetch_quote(author):
 
         # find title
         quoteTitle = data.find_all('div', {"class": "authorOrTitle"})
+
+    for quote in quotes:
+         print(quote)
+
+
 
 
     return quotes
