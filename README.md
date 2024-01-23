@@ -1,2 +1,4 @@
-# Program for generating a randopm quote by the author that is entered
-# Quotes are fetched from goodreads
+# quotes-by-author-goodreads
+## Program for generating a randopm quote by the author that is entered
+
+Quotes are fetched from goodreads
